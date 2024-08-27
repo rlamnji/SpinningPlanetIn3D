@@ -39,7 +39,7 @@
         'https://cdn.pixabay.com/photo/2020/02/04/17/04/map-4818860_960_720.jpg',//화성
         'https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/201908/09/seoul/20190809103106479qkxm.jpg',//목성
         'https://img1.daumcdn.net/thumb/R720x0.q80/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F12634B294ADC323102',//토성
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0qyR-GmCaV9x075JBkbkjVByGgw35yrV6jA&s',//천왕성
+        'https://supernova.eso.org/static/archives/exhibitionimages/screen/uranusmap-10x5k-CC.jpg',//천왕성
         'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/9ca15be5-bdef-4bda-8172-2eac787b4d57/df3w9u3-8d7ac0f7-4b06-4151-a01c-90b9ac41ad39.png/v1/fill/w_1280,h_640,q_80,strp/neptune_texture_map___custom_by_adamirman2810_df3w9u3-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQwIiwicGF0aCI6IlwvZlwvOWNhMTViZTUtYmRlZi00YmRhLTgxNzItMmVhYzc4N2I0ZDU3XC9kZjN3OXUzLThkN2FjMGY3LTRiMDYtNDE1MS1hMDFjLTkwYjlhYzQxYWQzOS5wbmciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.E5P1JjydNLUi89sbdW8uu_gG-GL0AWFvFRtiJQr7RxQ',//해왕성
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0qyR-GmCaV9x075JBkbkjVByGgw35yrV6jA&s',//명왕성
         'https://static.vecteezy.com/system/resources/previews/004/846/303/original/wood-abstract-texture-backgrounds-free-vector.jpg'
@@ -116,12 +116,13 @@
             scene.add(saturn);
 
             // 토성의 고리 추가
-              const ringGeometry = new THREE.TorusGeometry(6, 0.3, 16, 100); // 반지름, 두께, 분할 수, 세분화
+              const ringGeometry = new THREE.TorusGeometry(4, 0.5, 16, 100); // 반지름, 두께, 분할 수, 세분화
               const ringMaterial = new THREE.MeshStandardMaterial({
                   map : textures[9],
                   side: THREE.DoubleSide,
               });
               const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+              ring.scale.set(1.5, 1, 1);
               ring.rotation.x = -Math.PI / 2; // 고리를 수평으로 배치
               ring.position.set(10, 0, 0); // 토성과 같은 위치
 
