@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Three.js Project</title>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script>
+    // Scene 생성
+    const scene = new THREE.Scene();
+    
+    //size 설정
+    const sizes = {width: window.innerWidth,height: window.innerHeight,};
+    
+    //camera 설정
+    const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 1000);
+    camera.position.z = 50;
+    scene.add(camera);
+
+    // Renderer 생성
+    const renderer = new THREE.WebGLRenderer({ antialias: true, });
+    renderer.setSize(sizes.width, sizes.height);
+    renderer.setClearColor(new THREE.Color("#000000"), 1); // 배경색
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // 픽셀 비율 설정
+    document.body.appendChild(renderer.domElement);
+
+   
+
+    // TextureLoader 생성
+    const textureLoader = new THREE.TextureLoader();
+
+    // 여러 텍스처를 비동기적으로 로드
+    const textureUrls = [
+        'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/9b7029c3-9717-4658-9066-11c30aa24029/dcorxow-34c340a6-19db-42f8-89f9-2c008afd1fa8.png/v1/fill/w_1280,h_640,q_80,strp/mercury_texture_map__improved__by_oleg_pluton_dcorxow-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQwIiwicGF0aCI6IlwvZlwvOWI3MDI5YzMtOTcxNy00NjU4LTkwNjYtMTFjMzBhYTI0MDI5XC9kY29yeG93LTM0YzM0MGE2LTE5ZGItNDJmOC04OWY5LTJjMDA4YWZkMWZhOC5wbmciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.rb7eF1JIKZjBZKh1EEgQQFEghjZBvy3U5Gm6eSd6Kpo', // 수성
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7wV4wb_X4YmvNCK1DuVFOR22GY6qmQFuDfQ&s', // 금성
+        'https://as1.ftcdn.net/v2/jpg/03/83/51/76/1000_F_383517627_utkcvl153CHKNN4VRZqR9yjdF5vaW6CG.jpg', // 지구
+        'https://cdn.pixabay.com/photo/2020/02/04/17/04/map-4818860_960_720.jpg',//화성
+        'https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/201908/09/seoul/20190809103106479qkxm.jpg',//목성
+        'https://img1.daumcdn.net/thumb/R720x0.q80/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F12634B294ADC323102',//토성
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0qyR-GmCaV9x075JBkbkjVByGgw35yrV6jA&s',//천왕성
+        'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/9ca15be5-bdef-4bda-8172-2eac787b4d57/df3w9u3-8d7ac0f7-4b06-4151-a01c-90b9ac41ad39.png/v1/fill/w_1280,h_640,q_80,strp/neptune_texture_map___custom_by_adamirman2810_df3w9u3-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQwIiwicGF0aCI6IlwvZlwvOWNhMTViZTUtYmRlZi00YmRhLTgxNzItMmVhYzc4N2I0ZDU3XC9kZjN3OXUzLThkN2FjMGY3LTRiMDYtNDE1MS1hMDFjLTkwYjlhYzQxYWQzOS5wbmciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.E5P1JjydNLUi89sbdW8uu_gG-GL0AWFvFRtiJQr7RxQ',//해왕성
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0qyR-GmCaV9x075JBkbkjVByGgw35yrV6jA&s',//명왕성
+        'https://static.vecteezy.com/system/resources/previews/004/846/303/original/wood-abstract-texture-backgrounds-free-vector.jpg'
+      ];
+
+    Promise.all(textureUrls.map(url => textureLoader.loadAsync(url)))
+        .then(textures => {
+
+          // 별 배경 생성
+          const numStars = 1000;
+          const starGeometry = new THREE.BufferGeometry();
+          const positions = new Float32Array(numStars * 3); // 별의 위치 저장할 배열(x,y,z)
+
+          for (let i = 0; i < numStars * 3; i += 3) {
+              positions[i] = Math.random() * 200 - 100; // x
+              positions[i + 1] = Math.random() * 200 - 100; // y
+              positions[i + 2] = Math.random() * 200 - 100; // z
+          }
+
+          starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+          
+          const starMaterial = new THREE.PointsMaterial({
+              size: 0.2,
+              color: 0xffffff
+          });
+          
+          const stars = new THREE.Points(starGeometry, starMaterial);
+          scene.add(stars);
+
+            // 수성
+            const geometry0 = new THREE.SphereGeometry(3, 32, 32);
+            const material0 = new THREE.MeshStandardMaterial({ map: textures[0] });
+            const mercury = new THREE.Mesh(geometry0, material0);
+            mercury.position.x = -10;
+            mercury.position.y = 10;
+            scene.add(mercury);
+
+            //금성
+            const geometry1 = new THREE.SphereGeometry(3, 32, 32);
+            const material1 = new THREE.MeshStandardMaterial({ map: textures[1] });
+            const venus = new THREE.Mesh(geometry1, material1);
+            venus.position.x = 0;
+            venus.position.y = 10;
+            scene.add(venus);
+
+            //지구
+            const geometry2 = new THREE.SphereGeometry(3,32,32);
+            const material2 = new THREE.MeshStandardMaterial({map : textures[2]});
+            const earth = new THREE.Mesh(geometry2, material2);
+            earth.position.x = 10;
+            earth.position.y = 10;
+            scene.add(earth);
+
+          
+           // 화성
+            const geometry3 = new THREE.SphereGeometry(3, 32, 32);
+            const material3 = new THREE.MeshStandardMaterial({ map: textures[3] });
+            const mars = new THREE.Mesh(geometry3, material3);
+            mars.position.x = -10;
+            scene.add(mars);
+
+            // 목성
+            const geometry4 = new THREE.SphereGeometry(3, 32, 32);
+            const material4 = new THREE.MeshStandardMaterial({ map: textures[4] });
+            const jupiter = new THREE.Mesh(geometry4, material4);
+            jupiter.position.x = 0;
+            scene.add(jupiter);
+
+            // 토성
+            const geometry5 = new THREE.SphereGeometry(3, 32, 32);
+            const material5 = new THREE.MeshStandardMaterial({ map: textures[5] });
+            const saturn = new THREE.Mesh(geometry5, material5);
+            saturn.position.x = 10;
+            scene.add(saturn);
+
+            // 토성의 고리 추가
+              const ringGeometry = new THREE.TorusGeometry(6, 0.3, 16, 100); // 반지름, 두께, 분할 수, 세분화
+              const ringMaterial = new THREE.MeshStandardMaterial({
+                  map : textures[9],
+                  side: THREE.DoubleSide,
+              });
+              const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+              ring.rotation.x = -Math.PI / 2; // 고리를 수평으로 배치
+              ring.position.set(10, 0, 0); // 토성과 같은 위치
+
+              scene.add(ring);
+
+            // 천왕성
+            const geometry6 = new THREE.SphereGeometry(3, 32, 32);
+            const material6 = new THREE.MeshStandardMaterial({ map: textures[6] });
+            const uranus = new THREE.Mesh(geometry6, material6);
+            uranus.position.x = -10;
+            uranus.position.y = -10;
+            scene.add(uranus);
+
+            // 해왕성
+            const geometry7 = new THREE.SphereGeometry(3, 32, 32);
+            const material7 = new THREE.MeshStandardMaterial({ map: textures[7] });
+            const neptunus = new THREE.Mesh(geometry7, material7);
+            neptunus.position.x = 0;
+            neptunus.position.y = -10;
+            scene.add(neptunus);
+
+            // 명왕성
+            const geometry8 = new THREE.SphereGeometry(3, 32, 32);
+            const material8 = new THREE.MeshStandardMaterial({ map: textures[8] });
+            const pluto = new THREE.Mesh(geometry8, material8);
+            pluto.position.x = 10;
+            pluto.position.y = -10;
+            scene.add(pluto);
+
+            
+
+            // 조명 추가
+            const ambientLight = new THREE.AmbientLight(0x404040); // 부드러운 환경광
+            scene.add(ambientLight);
+
+            const pointLight = new THREE.PointLight(0xffffff, 1, 100); // 점광원
+            pointLight.position.set(5, 5, 5);
+            scene.add(pointLight);
+
+            // 창 크기 조절 이벤트 처리
+            window.addEventListener("resize", () => {
+                sizes.width = window.innerWidth;
+                sizes.height = window.innerHeight;
+
+                camera.aspect = sizes.width / sizes.height;
+                camera.updateProjectionMatrix();
+
+                renderer.setSize(sizes.width, sizes.height);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            });
+
+            // 애니메이션 함수
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // 구체 회전 애니메이션
+                
+                mercury.rotation.x += 0.007;
+                mercury.rotation.y += 0.007;
+
+                venus.rotation.x += 0.005;
+                venus.rotation.y += 0.005;
+
+                earth.rotation.x += 0.01;
+                earth.rotation.y += 0.01;
+
+                mars.rotation.x += 0.01;
+                mars.rotation.y += 0.01;
+
+                jupiter.rotation.x += 0.04;
+                jupiter.rotation.y += 0.04;
+
+                saturn.rotation.x += 0.03;
+                saturn.rotation.y += 0.03;
+                ring.rotation.x += 0.03;
+                ring.rotation.y += 0.03;
+
+                uranus.rotation.x += 0.025;
+                uranus.rotation.y += 0.025;
+
+                neptunus.rotation.x += 0.025;
+                neptunus.rotation.y += 0.025;
+
+                pluto.rotation.x += 0.008;
+                pluto.rotation.y += 0.008;
+
+                stars.rotation.x += 0.001;
+                stars.rotation.y += 0.001;
+                
+
+                // 장면 렌더링
+                renderer.render(scene, camera);
+            }
+
+            // 애니메이션 시작
+            animate();
+        })
+        .catch(error => {
+            console.error('An error occurred while loading the textures:', error);
+        });
+    </script>
+  </body>
+</html>
