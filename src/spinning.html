@@ -66,7 +66,7 @@
           starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
           
           const starMaterial = new THREE.PointsMaterial({
-              size: 0.05,
+              size: 0.2,
               color: 0xffffff
           });
           
@@ -94,7 +94,7 @@
           const points = orbitCurve.getPoints(100);
           const orbitGeometry = new THREE.BufferGeometry().setFromPoints(points);
 
-          const orbitMaterial = new THREE.LineBasicMaterial({ color: 0x808080, opacity: 0.5, transparent: true });
+          const orbitMaterial = new THREE.LineBasicMaterial({ color: 0xffffff, opacity: 0.5, transparent: true });
           const m_orbit = new THREE.Line(orbitGeometry, orbitMaterial);
 
           m_orbit.rotation.x = Math.PI / 2; // 수평면에 타원형 궤도를 놓기 위해 회전
@@ -122,7 +122,7 @@
           const venusPoints = venusOrbit.getPoints(100);
           const venusOrbitGeo = new THREE.BufferGeometry().setFromPoints(venusPoints);
 
-          const venusOrbitMat = new THREE.LineBasicMaterial({ color: 0x808080, opacity: 0.5, transparent: true });
+          const venusOrbitMat = new THREE.LineBasicMaterial({ color: 0xffffff, opacity: 0.5, transparent: true });
           const v_orbit = new THREE.Line(venusOrbitGeo, venusOrbitMat);
 
           v_orbit.rotation.x = Math.PI / 2; // 수평면에 타원형 궤도를 놓기 위해 회전
@@ -150,7 +150,7 @@
           const earthPoints = EarthOrbit.getPoints(100);
           const earthOrbitGeo = new THREE.BufferGeometry().setFromPoints(earthPoints);
 
-          const earthOrbitMat = new THREE.LineBasicMaterial({ color: 0x808080, opacity: 0.5, transparent: true });
+          const earthOrbitMat = new THREE.LineBasicMaterial({ color: 0xffffff, opacity: 0.5, transparent: true });
           const e_orbit = new THREE.Line(earthOrbitGeo, earthOrbitMat);
 
           e_orbit.rotation.x = Math.PI / 2;
@@ -176,7 +176,7 @@
           const marsPoints = MarsOrbit.getPoints(100);
           const marsOrbitGeo = new THREE.BufferGeometry().setFromPoints(marsPoints);
 
-          const marsOrbitMat = new THREE.LineBasicMaterial({ color: 0x808080, opacity: 0.5, transparent: true });
+          const marsOrbitMat = new THREE.LineBasicMaterial({ color: 0xffffff, opacity: 0.5, transparent: true });
           const mars_orbit = new THREE.Line(marsOrbitGeo, marsOrbitMat);
 
           mars_orbit.rotation.x = Math.PI / 2;
@@ -202,7 +202,7 @@
 
           const JuPoints = JuOrbit.getPoints(100)
           const JuOrbitGeo = new THREE.BufferGeometry().setFromPoints(JuPoints);
-          const JuOrbitMat = new THREE.LineBasicMaterial({ color: 0x808080, opacity: 0.5, transparent: true });
+          const JuOrbitMat = new THREE.LineBasicMaterial({ color: 0xffffff, opacity: 0.5, transparent: true });
           const j_orbit = new THREE.Line(JuOrbitGeo, JuOrbitMat);
 
           j_orbit.rotation.x = Math.PI / 2;
@@ -228,7 +228,7 @@
 
           const Sapoints = SaturnOrbit.getPoints(100)
           const SaOrbitGeo = new THREE.BufferGeometry().setFromPoints(Sapoints);
-          const SaOrbitMat = new THREE.LineBasicMaterial({ color: 0x808080, opacity: 0.5, transparent: true });
+          const SaOrbitMat = new THREE.LineBasicMaterial({ color: 0xffffff, opacity: 0.5, transparent: true });
           const s_orbit = new THREE.Line(SaOrbitGeo, SaOrbitMat);
 
           s_orbit.rotation.x = Math.PI / 2;
@@ -265,7 +265,7 @@
 
           const urapoints = UraOrbit.getPoints(100)
           const uraOrbitGeo = new THREE.BufferGeometry().setFromPoints(urapoints);
-          const uraOrbitMat = new THREE.LineBasicMaterial({ color: 0x808080, opacity: 0.5, transparent: true });
+          const uraOrbitMat = new THREE.LineBasicMaterial({ color: 0xffffff, opacity: 0.5, transparent: true });
           const u_orbit = new THREE.Line(uraOrbitGeo, uraOrbitMat);
 
           u_orbit.rotation.x = Math.PI / 2;
@@ -292,7 +292,7 @@
 
           const neppoints = NepOrbit.getPoints(100)
           const nepOrbitGeo = new THREE.BufferGeometry().setFromPoints(neppoints);
-          const nepOrbitMat = new THREE.LineBasicMaterial({ color: 0x808080, opacity: 0.5, transparent: true });
+          const nepOrbitMat = new THREE.LineBasicMaterial({ color: 0xffffff, opacity: 0.5, transparent: true });
           const n_orbit = new THREE.Line(nepOrbitGeo, nepOrbitMat);
 
           n_orbit.rotation.x = Math.PI / 2;
@@ -319,7 +319,7 @@
 
           const plpoints = plOrbit.getPoints(100)
           const plOrbitGeo = new THREE.BufferGeometry().setFromPoints(plpoints);
-          const plOrbitMat = new THREE.LineBasicMaterial({ color: 0x808080, opacity: 0.5, transparent: true });
+          const plOrbitMat = new THREE.LineBasicMaterial({ color: 0xffffff, opacity: 0.5, transparent: true });
           const p_orbit = new THREE.Line(plOrbitGeo, plOrbitMat);
 
           p_orbit.rotation.x = Math.PI / 2; // 궤도를 수평으로 만들기
