@@ -19,21 +19,11 @@ _Three.js_ 라이브러리를 사용하여 행성의 자전과 공전을 시각�
 
     - #### basicSpinPlanet.html  
                 
-<<<<<<< HEAD
          ![basic](https://github.com/user-attachments/assets/3279ed1b-f84e-49c3-84af-44f3da180b13)
 
     - #### spinning.html  
                 
          ![spinning](https://github.com/user-attachments/assets/8c800248-16eb-496f-aadf-9cebb0d06723)       
-=======
-
-
-
-    - #### spinning.html  
-                
-
-
->>>>>>> efdb299c4c1ab1f2934c9a4df9af81511c021975
 
 * ### Extra Details
 
